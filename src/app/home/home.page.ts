@@ -7,6 +7,11 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+    public disableInput : boolean;
+  constructor() {
+    this.disableInput = true;
+  }
+  public notify(){
+    console.log("Toggled: " + this.disableInput);
+  }
 }

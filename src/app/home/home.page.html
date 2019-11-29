@@ -1,14 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-img id="img" src="../../assets/shapes.svg"></ion-img>
+  <ion-item class="input">
+    <ion-label position="floating">Username</ion-label>
+    <ion-input disabled="{{disableInput}}"></ion-input>
+  </ion-item>
+  <ion-item class="input">
+    <ion-label position="floating">Password</ion-label>
+    <ion-input disabled="{{disableInput}}"></ion-input>
+  </ion-item>
+  <ion-button id="btn" color="dark" expand="block">Login</ion-button>
+  <a href="#" id="link">Forgot your password?</a>
+  <ion-toggle [(ngModel)]="disableInput" (ionChange)="notify()"></ion-toggle>
 </ion-content>
