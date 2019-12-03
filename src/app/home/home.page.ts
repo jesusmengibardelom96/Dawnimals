@@ -7,11 +7,37 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-    public disableInput : boolean;
-  constructor() {
-    this.disableInput = true;
-  }
-  public notify(){
+    disableInput : boolean = true;
+    forgotString : string = "Forgot your password?";
+    name: string = "";
+    passwd: string = "";
+    labelMsg: string = "";
+    validator: boolean  = true;
+
+  constructor() {}
+
+  notify(){
     console.log("Toggled: " + this.disableInput);
+  }
+  changeButtonString(){
+    this.forgotString="Set your password";
+  }
+  validateInputs(){
+    if(this.name.trim() === "" || this.passwd.trim() === ""){
+      this.labelMsg = "You cannot make that!";
+      this.validator = false;
+    }else{
+      this.labelMsg = "";
+    }
+  }
+  validateInputs2(){
+    if(this.validator === false){
+      if(this.name.trim() === "" || this.passwd.trim() === ""){
+        this.labelMsg = "You cannot make that!";
+        this.validator = false;
+      }else{
+        this.labelMsg = "";
+      }
+    }
   }
 }
