@@ -8,36 +8,31 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" id="refresher" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/gato.jpg">
-      </ion-avatar>
-      <ion-label>
-        <h2>Cat</h2>
-        <ion-icon name="play" class="ion-float-right ion-margin-bottom"></ion-icon>
-        <p>mammal</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/perro.jpg">
-      </ion-avatar>
-      <ion-label>
-        <h2>Dog</h2>
-        <ion-icon name="play" class="ion-float-right ion-margin-bottom"></ion-icon>
-        <p>mammal</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/mono.jpg">
-      </ion-avatar>
-      <ion-label>
-        <h2>Monkey</h2>
-        <ion-icon name="play" class="ion-float-right ion-margin-bottom"></ion-icon>
-        <p>mammal</p>
-      </ion-label>
-    </ion-item>
+    <ion-item-sliding *ngFor="let animal of animales; let i = index" (click)="infoAnimal(animal)">
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteAnimal(i)">
+          <ion-icon slot="top" name="trash"></ion-icon>
+          Delete
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item>
+        <ion-avatar slot="start">
+          <ion-img src="{{animal.imagen}}"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{animal.nombre}}</h2>
+          <ion-icon name="pause" class="ion-float-right ion-margin-bottom" (click)="stopSound(animal)"
+            *ngIf="animal.reproduciendo; else elseBlock"></ion-icon>
+          <ng-template #elseBlock>
+            <ion-icon name="play" class="ion-float-right ion-margin-bottom" (click)="makeSound(animal)"></ion-icon>
+          </ng-template>
+          <p></p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
