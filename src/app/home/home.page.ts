@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomePage {
     labelMsg: string = "";
     validator: boolean  = true;
 
-  constructor() {}
+  constructor(private router:Router) {}
 
   notify(){
     console.log("Toggled: " + this.disableInput);
@@ -27,6 +28,7 @@ export class HomePage {
       this.labelMsg = "You cannot make that!";
       this.validator = false;
     }else{
+      this.router.navigateByUrl("tabs");
       this.labelMsg = "";
     }
   }

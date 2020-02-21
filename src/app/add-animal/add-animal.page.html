@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary" class="ion-text-center">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>New animal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="input">
+    <ion-label position="floating">Name: </ion-label>
+    <ion-input [(ngModel)]="animalName"></ion-input>
+  </ion-item>
+  <ion-label color="danger" class="marginLeft">{{labelMsg}}</ion-label>
+  <ion-grid>
+    <ion-row >
+      <ion-col size="4" *ngFor="let item of data;">
+        <div><img src="{{item.avatar}}" width="150px" height="150px" (click)="likeImage(item)" [ngClass]="{'liked': item.liked}"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button expand="block" class="ion-margin-top" (click)="addNimal()">Save</ion-button>
+</ion-content>

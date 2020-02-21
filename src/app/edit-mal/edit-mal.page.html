@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary" class="ion-text-center">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editing {{wc.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img id="img" src="{{wc.imagen}}"></ion-img>
+  <ion-item class="input">
+    <ion-label position="floating">Name: </ion-label>
+    <ion-input value="{{wc.nombre}}" [(ngModel)]="animalName"></ion-input>
+  </ion-item>
+  <ion-button color="primary" expand="block" (click)="validator(wc)">Save</ion-button>
+</ion-content>

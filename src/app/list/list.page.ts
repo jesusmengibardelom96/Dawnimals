@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ANIMALES } from './data/data.animales';
-import { Animal } from './model/animales.interface';
-
+/* import { ANIMALES } from '../data/data.animales';
+import { Animal } from '../model/animales.interface'; */
+import { IonReorderGroup } from '@ionic/angular';
+import { myService } from '../data/data.services';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list',
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
-  animales: Animal[] = [];
+
+  reorderGroup : IonReorderGroup;
+  activacion : boolean = true;
+  animales: any = [];
   audioAnimal = new Audio();
   savedAnimal: any;
   seAcabo: any;
-  constructor() {
-    this.animales = ANIMALES.slice(0);
+  visibility: string = "";
+  constructor(private _myService: myService, private router:Router) {
+    this.animales = this._myService.getData();
   }
 
   infoAnimal(info) {
@@ -55,14 +61,36 @@ export class ListPage implements OnInit {
   deleteAnimal(i){
     this.animales.splice(i, 1);
   }
+  editAnimal(animal, i){
+    this.router.navigate(["/edit-mal", {wc: JSON.stringify(animal), cont: i}]);
+  }
+  addAnimal(){
+    this.router.navigateByUrl("add-animal");
+  }
   doRefresh(event) {
     console.log('Begin async operation');
 
     setTimeout(() => {
       console.log('Async operation has ended');
-      location.reload();
+      this.animales = this._myService.reset();
       event.target.complete();
     }, 2000);
+  }
+  doReorder(ev: any){
+    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
+    let draggedItem = this.animales.splice(ev.detail.from,1)[0];
+     this.animales.splice(ev.detail.to,0,draggedItem)
+     console.log(this.animales);
+    ev.detail.complete();
+  }
+  toggleReorderGroup() {
+    if(this.activacion === true){
+      this.activacion = false;
+      this.visibility = "hidden";
+    }else{
+      this.activacion =true;
+      this.visibility = "";
+    }
   }
   ngOnInit() {
   }
